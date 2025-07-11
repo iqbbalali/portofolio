@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 1. Tambahkan CSS Swiper.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Sanchez&family=Satisfy&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#hero-section">Home</a></li>
+            <li><a href="#about-section">About Me</a></li>
+            <li><a href="#skills-section">Skills</a></li>
+            <li><a href="#works-section">Works</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero-section" id="hero-section">
+        <div class="portfolio-title fade-in-on-load">
+            <!-- Elemen yang diposisikan secara bebas -->
+            <img src="img/muka.png" alt="O" class="char-image-large">            
+    
+            <!-- Kontainer untuk teks agar alurnya tetap normal -->
+            <div class="text-wrapper">
+                <!-- Baris Pertama: P rto -->
+                <div class="title-line">
+                    <span class="char-capital">P</span>
+                    <span class="char-placeholder"></span> <!-- Placeholder untuk gambar -->
+                    <span class="char-lowercase rto-text">
+                        rto
+                        <div class="l-block"></div> <!-- l-block dipindahkan ke sini -->
+                    </span>
+                </div>
+                <!-- Baris Kedua: F io -->
+                <div class="title-line">
+                    <span class="char-capital f-char">F</span>
+                    <span class="char-placeholder"></span> <!-- Placeholder untuk gambar -->
+                    <span class="char-lowercase io-text">io</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bagian Tentang Saya -->
+    <section id="about-section">
+        <div class="about-image-container">
+            <!-- Ganti 'src' dengan path ke foto Anda -->
+            <img src="img/edit.png" alt="Foto Profil Utama" class="about-img-main">
+        </div>
+        <div class="about-text-container">
+            <h2 class="about-title">
+                <span class="highlight">About Me</span>
+            </h2>
+            <p class="about-description">
+                Hello,my name is Iqbal Ali. I am a second-year student majoring in Animation at the Indonesian 
+                Institute of the Arts (ISI) Surakarta.
+
+            </p>
+            <p class="about-description">
+                I have a strong interest in Art Concept, 2D Art, and Animation. I am creative, persistent, 
+                and enthusiastic in seeing new experiences to develop my skills and broaden my knowledge in 2D Art,
+                Art Concept, and animation production.
+            </p>
+            <!-- Tautan Sosial Media -->
+            <div class="about-social-links">
+                <a href="https://www.instagram.com/galerinyaiqbal" target="_blank" class="social-link">
+                    <img src="img/icons/instagram.png" alt="Instagram" class="social-icon">
+                </a>
+                <a href="mailto:iniiqbalali@gmail.com" class="social-link">
+                    <img src="img/icons/email.png" alt="Email" class="social-icon">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Software & Skills -->
+    <section id="skills-section">
+        <h2 class="skills-title">
+            <span class="highlight">Software & Skills</span>
+        </h2>
+
+        <!-- Grid untuk ikon-ikon software -->
+        <div class="skills-grid">
+            <!-- Setiap item skill memiliki data-skill untuk identifikasi di JS -->
+            <div class="skill-item" data-skill="canva">
+                <img src="img/icons/canva.png" alt="Canva">
+            </div>
+            <div class="skill-item" data-skill="csp">
+                <img src="img/icons/csp.png" alt="Clip Studio Paint">
+            </div>
+            <div class="skill-item" data-skill="capcut">
+                <img src="img/icons/capcut.png" alt="CapCut">
+            </div>
+            <div class="skill-item" data-skill="blender">
+                <img src="img/icons/blender.png" alt="Blender 3D">
+            </div>
+        </div>
+
+        <!-- Kontainer untuk menampilkan detail skill yang dipilih -->
+        <div class="skill-details-container">
+            <h3 id="skill-name">Pilih ikon untuk melihat detail</h3>
+            <p id="skill-description"></p>
+            <div class="progress-bar"><div class="progress-bar-inner" id="skill-level"></div></div>
+        </div>
+    </section>
+
+    <!-- Bagian Karya / Portfolio -->
+    <section id="works-section">
+        <h2 class="works-title">
+            <span class="highlight">My Works</span>
+        </h2>
+
+        <!-- Wrapper baru untuk slider utama dan navigasinya -->
+        <div class="main-slider-wrapper">
+            <!-- Slider diubah menggunakan struktur Swiper.js -->
+            <div class="swiper works-slider">
+                <div class="swiper-wrapper">
+                    <!-- Karya 1 -->
+                    <div class="swiper-slide" data-project-id="project-a">
+                        <img src="img/works/cover1.png" alt="Cover Karya 1">
+                        <h3>Bercelo-teh</h3>
+                    </div>
+                    <!-- Karya 2 -->
+                    <div class="swiper-slide" data-project-id="project-b">
+                        <img src="img/works/cover2.png" alt="Cover Karya 2">
+                        <h3>Jejak Tarana</h3>
+                    </div>
+                    <!-- Coming Soon -->
+                    <div class="swiper-slide coming-soon">
+                        <img src="img/works/coming-soon.jpg">
+                    </div>
+                </div>
+            </div>
+            <!-- Tombol Navigasi dipindahkan ke dalam wrapper -->
+            <div class="swiper-button-prev main-swiper-button-prev"></div>
+            <div class="swiper-button-next main-swiper-button-next"></div>
+        </div>
+
+        <!-- KONTENER DETAIL PROYEK (STRUKTUR BARU) -->
+        <div class="project-details-container">
+            <div class="project-details-content">
+                <!-- Kolom Kiri: Deskripsi Proyek -->
+                <div class="project-description">
+                    <h3 id="detail-title">Judul Proyek</h3>
+                    <p id="detail-description">
+                        Deskripsi proyek akan muncul di sini setelah Anda mengklik salah satu cover di atas.
+                    </p>
+                </div>
+
+                <!-- Kolom Kanan: Slider Gambar Proyek -->
+                <div class="project-images-slider swiper"> <!-- Tambahkan class 'swiper' -->
+                    <div class="swiper-wrapper">
+                        <!-- Slide gambar akan ditambahkan oleh JavaScript -->
+                    </div>
+                    <!-- Tombol Navigasi untuk slider detail -->
+                    <div class="swiper-button-next detail-swiper-button-next"></div>
+                    <div class="swiper-button-prev detail-swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menghubungkan file JavaScript untuk efek paralaks -->
+    <script src="script.js" defer></script>
+
+    <!-- 2. Tambahkan JavaScript Swiper.js sebelum penutup body -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+</body>
+</html>

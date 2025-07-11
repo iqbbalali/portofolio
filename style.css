@@ -1,0 +1,744 @@
+/* Pengaturan global untuk scrolling */
+html {
+    scroll-behavior: smooth; /* Membuat lompatan link menjadi animasi scroll */
+    scroll-padding-top: 70px; /* Memberi jarak agar judul section tidak tertutup nav saat dilompat */
+}
+/* Pengaturan dasar untuk halaman */
+body {
+    /* Warna latar belakang dipindahkan ke hero-section */
+    font-family: 'Montserrat', sans-serif; /* Menggunakan font yang modern */
+    margin: 0;
+    /* Menambahkan anti-aliasing untuk teks yang lebih halus */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- DEFINISI FONT LOKAL --- */
+@font-face {
+    font-family: 'Maharlika'; /* Nama yang akan kita gunakan di CSS */
+    /* Ganti 'Maharlika.ttf' jika nama file atau formatnya berbeda (misal: .otf) */
+    src: url('fonts/Maharlika-Regular.ttf') format('truetype');
+}
+
+/* --- NAVIGATION BAR --- */
+.main-nav {
+    position: fixed; /* Tetap di atas saat scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(44, 44, 44, 0.7); /* Warna gelap semi-transparan */
+    backdrop-filter: blur(8px); /* Efek frosted glass untuk browser modern */
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000; /* Memastikan nav bar selalu di paling depan */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    transition: top 0.3s; /* Untuk animasi hide/show (opsional) */
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-nav a {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    position: relative;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.main-nav a:hover {
+    color: #f9e694; /* Warna kuning saat di-hover */
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Bagian Hero (Judul Utama) */
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Mengisi tinggi layar penuh */
+    background-color: #416acc; /* Latar belakang biru gelap */
+    color: #f0f0f0; /* Warna teks putih keabuan */
+}
+
+/* Kontainer utama untuk judul */
+.portfolio-title {
+    position: relative; /* Diperlukan agar posisi absolut 'R' berfungsi */
+    display: inline-block; /* Agar kontainer menyesuaikan dengan konten */
+}
+
+/* Kontainer untuk teks agar alurnya tetap normal */
+.text-wrapper {
+    /* z-index agar teks berada di atas gambar (yang z-indexnya -1) */
+    position: relative;
+    z-index: 1;
+}
+
+/* Pengaturan untuk setiap baris (PORTO dan FOLIO) */
+.title-line {
+    display: flex;
+    /* Mengatur agar semua elemen sejajar secara vertikal di tengah */
+    align-items: center;
+    line-height: 0.7
+; /* Mengatur jarak antar baris */
+}
+
+/* Gaya untuk semua huruf kapital (P, F, TO, IO) */
+.char-capital {
+    font-size: 10rem; /* Kembali ke ukuran asli */
+    font-weight: 900; /* Sangat tebal */
+}
+
+/* Gaya untuk huruf kecil (rto dan io) */
+.char-lowercase {
+    font-size: 11rem;
+    font-weight: 900; /* Diubah menjadi tebal seperti P dan F */
+    text-transform: lowercase;
+    /* Menyelaraskan teks kecil ke bagian bawah baris */
+    align-self: flex-end;
+    padding-bottom: 1rem; /* Penyesuaian vertikal agar pas */
+}
+
+/* DIUBAH: Menjadikan .rto-text sebagai acuan posisi untuk l-block */
+.rto-text {
+    position: relative;
+}
+
+/* Placeholder untuk memberi ruang bagi gambar dan r/L */
+.char-placeholder {
+    display: inline-block;
+    /* Lebar ini memberi ruang untuk gambar di tengah */
+    width: 15rem;
+}
+
+/* Gaya untuk gambar besar yang menggantikan O */
+.char-image-large {
+    position: absolute;
+    /* Ukuran dan posisi gambar */
+    width: 16.4rem;  /* Ukuran disesuaikan kembali agar lebih seimbang */
+    height: 17.6rem; /* 22rem * 0.8 */
+    top: 50%;
+    left: 7rem; /* Posisi disesuaikan kembali dengan teks yang lebih besar */
+    transform: translateY(-50%); /* Trik untuk sentering vertikal */
+    object-fit: cover; /* Memastikan gambar mengisi lingkaran tanpa distorsi */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Mengatur layer gambar agar berada di belakang teks */
+    z-index: -1;
+}
+
+/* Blok kecil yang berfungsi sebagai 'L' visual */
+.l-block {
+    position: absolute;
+    background-color: #f7f7f7;
+    width: 2.7rem; /* Lebar untuk tampilan desktop */
+    height: 15rem; /* Tinggi untuk tampilan desktop */
+    /* Posisi sekarang terkunci pada teks "rto" */
+    left: 14.3%; /* Mulai dari ujung kanan "rto" */
+    bottom: -85%;   /* Sejajar dengan bagian bawah "rto" */
+    transform: translateX(-80%); /* Geser ke kiri agar sedikit menimpa huruf 'o' */
+    z-index: 2;
+}
+
+/* --- KONTROL POSISI "io" --- */
+.io-text {
+    position: relative; /* Wajib ada untuk mengaktifkan pergeseran */
+
+    /* Ubah nilai di bawah ini untuk menggeser "io" */
+    /* Contoh: geser 1rem ke kanan dan 0.5rem ke atas */
+    left: 4.2rem; 
+    bottom: 0rem;
+}
+
+/* --- ANIMASI FADE-IN SAAT HALAMAN DIMUAT --- */
+.fade-in-on-load {
+    opacity: 0;
+    transform: translateY(20px); /* Mulai 20px lebih rendah dari posisi akhir */
+    transition: opacity 1s ease-out, transform 0.8s ease-out; /* Animasikan opacity dan posisi */
+}
+
+.fade-in-on-load.is-visible {
+    opacity: 1;
+    transform: translateY(0); /* Kembali ke posisi normal */
+}
+
+/* --- BAGIAN TENTANG SAYA --- */
+
+#about-section {
+    background-color: #f9e694;
+    width: 100%;
+    display: flex;
+    /* align-items: flex-end akan membuat semua item (gambar dan teks) menempel ke bawah. */
+    align-items: flex-end;
+    padding: 2rem;
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar total */
+
+    /* --- PANDUAN MENGUBAH UKURAN --- */
+    /* Hapus komentar di bawah dan sesuaikan nilainya untuk mengubah tinggi bagian ini */
+    min-height: 80vh;
+}
+
+.about-image-container {
+    flex: 0 0 25%; /* CONTOH: Diubah menjadi 40% untuk gambar yang lebih besar */
+    padding-right: 3rem; /* Jarak antara gambar dan teks */
+
+    margin-left: 10rem;
+    position: relative; /* Diperlukan untuk positioning absolut */
+    /* Menghapus padding agar tidak ada jarak tambahan */
+    padding: 0;
+}
+
+.about-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 15px; /* Memberi sudut yang sedikit melengkung */
+}
+
+/* Gambar utama di depan */
+.about-img-main {
+    /* Properti position dan z-index tidak lagi diperlukan */
+    /* Efek feather diterapkan di sini */
+    position: relative;
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 10%);
+    mask-image: linear-gradient(to top, transparent 0%, black 15%);
+}
+
+/* Aturan untuk .about-img-duplicate dihapus karena elemennya sudah tidak ada */
+
+.about-text-container {
+    flex: 1; /* Mengisi sisa ruang yang tersedia */
+    max-width: 50rem;
+    max-height: 80%;
+    color: #2c2c2c; /* Warna teks gelap agar mudah dibaca di latar kuning */
+
+    /* Menambahkan padding-bottom agar teks tidak ikut menempel di dasar, */
+    /* sehingga posisinya terlihat lebih seimbang. */
+    padding-bottom: 5vh;
+}
+
+.about-title {
+    font-family: 'Maharlika', cursive; /* Menggunakan font lokal Anda */
+    font-size: 5rem; /* Ukuran disesuaikan untuk font baru */
+    font-weight: 400; /* Font script biasanya tidak butuh bold */
+    margin-top: 0rem;
+    margin-bottom:0rem;
+    padding-left: 0rem;
+   line-height: 1; /* Menyesuaikan jarak baris untuk font script */
+}
+
+.about-title .highlight {
+    background-color: #416acc; /* Warna highlight biru */
+    color: #f9e694; /* Warna teks di dalam highlight */
+    padding: 0.2em 0.5em; /* Memberi ruang di dalam highlight */
+    border-radius: 100px; /* Membuat sudut highlight menjadi rounded */
+    font-size: 2.5rem;
+}
+
+.about-description {
+    font-family: 'Sanchez', serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #416acc;
+
+    /* --- PANDUAN MENGGESER TEKS --- */
+    /* Ubah nilai padding-left di bawah ini untuk menggeser teks ke kanan. */
+    padding-left: 0rem;
+}
+
+/* Kontainer untuk tautan sosial media di bagian 'About Me' */
+.about-social-links {
+    margin-top: 3rem; /* Jarak dari teks deskripsi di atasnya ditambah */
+    display: flex;
+    gap: 1rem; /* Jarak antar tombol */
+}
+
+.social-link {
+    /* Mengubah display untuk mempermudah centering ikon di dalamnya */
+    display: inline-block; /* Cukup inline-block untuk link gambar */
+    /* Menghapus background dan properti terkait bentuk */
+    background-color: transparent;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+    /* Background dihilangkan, efek angkat dipertahankan */
+    transform: translateY(-3px); /* Efek sedikit terangkat saat di-hover */
+}
+
+/* Style untuk ikon di dalam link */
+.social-icon {
+    width: 40px;  /* Ukuran ikon diperbesar */
+    height: 40px; /* Ukuran ikon diperbesar */
+    vertical-align: middle; /* Memastikan ikon sejajar dengan baik */
+}
+/* --- BAGIAN SOFTWARE & SKILLS --- */
+
+#skills-section {
+    position: relative; /* Diperlukan agar pseudo-element bisa diposisikan */
+    /* DIUBAH: Padding atas dikurangi secara signifikan untuk mendekatkan section ini ke 'About Me' */
+    padding: 8rem 2rem 3rem;
+    background-color: #416acc; /* DIUBAH: Warna latar sama seperti hero section */
+    text-align: center;
+    overflow: hidden; /* Mencegah elemen keluar saat animasi */
+}
+
+/* Membuat transisi kurva dari bagian sebelumnya */
+#skills-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px; /* Ketinggian kurva */
+    background-color: #f9e694; /* Warna yang sama dengan section 'About Me' */
+    transform: translateY(-100%); /* Pindahkan ke atas agar menutupi batas lurus */
+
+    /* Bentuk kurva menggunakan clip-path */
+    clip-path: ellipse(75% 100% at 50% 100%);
+}
+
+.skills-title {
+    font-family: 'Maharlika', cursive;
+    font-size: 5rem;
+    font-weight: 400;
+    color: #f0f0f0; /* Warna teks putih agar kontras dengan background biru */
+    margin-top: 0;
+    margin-bottom: 2rem;
+    cursor: pointer; /* Menandakan judul bisa diklik */
+    display: inline-block; /* Agar transform berfungsi dengan baik */
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efek 'bouncy' */
+}
+
+.skills-title.title-clicked {
+    transform: translateY(20px); /* Judul bergerak ke bawah saat diklik */
+}
+
+.skills-title .highlight,
+.works-title .highlight {
+    background-color: transparent;
+    color: #f9e694;
+    border: 3px solid #f9e694;
+    padding: 0.2em 0.5em;
+    border-radius: 100px;
+    font-size: 2.5rem;
+}
+
+/* Grid untuk ikon-ikon */
+.skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem; /* Jarak antar ikon */
+    margin-top: 2rem;
+    /* Awalnya disembunyikan */
+    opacity: 0;
+    transform: translateY(-20px);
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, max-height 0.6s ease-in-out;
+}
+
+.skills-grid.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px; /* Nilai yang cukup besar untuk menampung ikon */
+}
+
+.skill-item {
+    cursor: pointer;
+    /* Memberi ukuran pada kontainer agar lebih besar dari ikon di dalamnya. */
+    /* Ini memberikan ruang bagi ikon untuk membesar (zoom) tanpa terpotong. */
+    width: 120px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.skill-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efek hover dan saat aktif */
+.skill-item:hover img {
+    transform: scale(1.15) translateY(-5px);
+    box-shadow: 0 8px 25px rgba(249, 230, 148, 0.4); /* DIUBAH: Bayangan menjadi warna kuning */
+}
+
+.skill-item.active img {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(249, 230, 148, 0.5); /* DIUBAH: Bayangan menjadi warna kuning */
+    border: 3px solid #f9e694; /* DIUBAH: Border menjadi warna kuning */
+}
+
+/* Kontainer detail skill */
+.skill-details-container {
+    margin: 3rem auto 0;
+    max-width: 600px;
+    /* Awalnya disembunyikan */
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, max-height 0.5s ease-in-out;
+}
+
+.skill-details-container.is-visible {
+    opacity: 1;
+    max-height: 500px;
+}
+
+#skill-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    color: #f0f0f0; /* DIUBAH: Warna teks putih */
+}
+
+#skill-description {
+    font-family: 'Sanchez', serif;
+    font-size: 1.1rem;
+    color: #d0d0d0; /* DIUBAH: Warna teks putih keabuan */
+    line-height: 1.6;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.2); /* DIUBAH: Latar progress bar lebih gelap */
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    overflow: hidden;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    width: 0; /* Awalnya 0, diubah oleh JS */
+    background: linear-gradient(90deg, #f9e694, #f7d959); /* DIUBAH: Gradasi warna kuning */
+    border-radius: 10px;
+    transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- BAGIAN KARYA / PORTFOLIO --- */
+
+#works-section {
+    position: relative;
+    /* DIUBAH: Padding atas dikurangi secara drastis agar lebih dekat dengan section skills */
+    padding: 3rem 0 5rem;
+    background-color: #416acc;
+    text-align: center;
+    overflow-x: hidden; /* Mencegah scroll horizontal di body */
+}
+
+/* Kurva pemisah ::before dihapus karena tidak diperlukan (latar belakang sama) */
+
+.works-title {
+    font-family: 'Maharlika', cursive;
+    font-size: 5rem;
+    font-weight: 400;
+    /* Warna sekarang diatur oleh span .highlight di dalamnya */
+    margin-top: 0;
+    margin-bottom: 3rem;
+}
+
+/* Wrapper untuk slider utama dan navigasinya agar posisi arrow stabil */
+.main-slider-wrapper {
+    position: relative;
+    max-width: 100%;
+}
+
+/* Kontainer utama Swiper */
+.works-slider {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 400px;
+}
+
+/* Setiap item slide (cover) */
+.swiper-slide {
+    flex: 0 0 300px; /* Lebar tetap untuk setiap slide */
+    height: 400px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    /* Efek transisi untuk opacity */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Slide yang tidak aktif akan sedikit transparan dan tidak bisa diklik */
+.swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.4;
+    pointer-events: none; /* Mencegah interaksi mouse (klik, hover) */
+}
+
+.swiper-slide:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* Kelas custom untuk slide yang detailnya sedang ditampilkan */
+.swiper-slide.details-active {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(65, 106, 204, 0.4);
+    border: 4px solid #416acc;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.swiper-slide:hover img { transform: scale(1.05); }
+
+.swiper-slide h3 {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    margin: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+/* Style untuk slide "Coming Soon" */
+.swiper-slide.coming-soon {
+        cursor: not-allowed;
+}
+
+
+
+.coming-soon-text { font-family: 'Maharlika', cursive; font-size: 3.5rem; color: #a0a0a0; line-height: 1; }
+
+/* Gaya untuk tombol navigasi Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+    background-color: transparent; /* DIUBAH: Hapus background solid */
+    width: 44px;
+    height: 44px;
+    /* Hapus border-radius dan box-shadow karena tidak ada background */
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 2.5rem; /* Ukuran panah disesuaikan */
+    font-weight: 900;
+    color: #f9e694; /* DIUBAH: Warna panah kuning agar kontras dengan latar biru */
+    /* Tambahkan bayangan tipis agar panah lebih menonjol */
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Kontainer untuk galeri detail */
+.project-details-container {
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 3rem; /* Sedikit padding tambahan */
+    background-color: #416acc; /* DIUBAH: Latar biru seperti section utama */
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(10, 20, 40, 0.3); /* DIUBAH: Shadow lebih kuat untuk efek mengambang */
+
+    /* Awalnya disembunyikan, diatur oleh JS */
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transform: translateY(20px);
+}
+
+.project-details-container.is-visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Layout 2 kolom untuk deskripsi dan slider */
+.project-details-content {
+    display: flex;
+    gap: 3rem; /* Jarak antara teks dan slider */
+    align-items: center; /* Menjaga agar konten sejajar di tengah secara vertikal */
+}
+
+/* Kolom kiri untuk deskripsi */
+.project-description {
+    flex: 1; /* Mengambil 1 bagian dari ruang */
+    min-width: 300px; /* Agar tidak terlalu sempit di layar kecil */
+    text-align: left;
+}
+
+.project-description h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    color: #f0f0f0; /* DIUBAH: Warna teks putih agar kontras */
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.project-description p {
+    font-family: 'Sanchez', serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #d0d0d0; /* DIUBAH: Warna teks putih keabuan agar kontras */
+}
+
+/* Kolom kanan untuk slider gambar */
+.project-images-slider {
+    flex: 1.5; /* Mengambil 1.5 bagian, sedikit lebih lebar dari teks */
+    max-width: 60%;
+    height: 450px; /* Tinggi yang nyaman */
+    /* overflow: hidden; dihapus agar shadow dari efek coverflow bisa terlihat */
+    /* Padding ditambahkan untuk memberi ruang pada slide di sisi-sisinya */
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+/* Menambahkan style untuk setiap slide di dalam slider detail */
+.project-images-slider .swiper-slide {
+    width: 280px;
+    height: 380px;
+    border-radius: 10px;
+    overflow: hidden; /* Memastikan gambar di dalam slide mengikuti border-radius */
+}
+
+/* Membuat slide yang tidak aktif menjadi transparan, sama seperti slider utama */
+.project-images-slider .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.4;
+}
+
+.project-images-slider .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- MEDIA QUERIES UNTUK RESPONSIVE DESIGN --- */
+
+/* Tablet (misal: iPad) - di bawah 1024px */
+@media (max-width: 1024px) {
+    html {
+        font-size: 90%; /* Sedikit perkecil font dasar agar elemen lain ikut menyesuaikan */
+    }
+
+    /* About Section */
+    #about-section {
+        /* Menghapus 'flex-direction: column' agar layout tetap berdampingan. */
+        /* Menyesuaikan padding untuk layar yang lebih kecil. */
+        padding: 4rem 2rem; 
+    }
+    .about-image-container {
+        /* Menghapus margin besar dari desktop dan mengatur ulang ukuran. */
+        margin-left: 0; 
+        padding-right: 2rem;
+        flex: 0 0 40%; /* Gambar mengambil 40% lebar. */
+    }
+    .about-text-container {
+        flex: 1 1 55%; /* Teks mengambil sisa ruang. */
+    }
+
+    /* Project Details */
+    .project-details-content {
+        flex-direction: column; /* Tumpuk deskripsi dan slider */
+        gap: 2rem;
+    }
+    .project-images-slider {
+        max-width: 100%;
+        margin-top: 2rem;
+        height: auto; /* Biarkan tinggi menyesuaikan */
+    }
+}
+
+/* Mobile (misal: iPhone) - di bawah 768px */
+@media (max-width: 768px) {
+    html {
+        font-size: 85%;
+        scroll-padding-top: 60px; /* Sesuaikan untuk nav bar yang mungkin lebih kecil */
+    }
+
+    /* Nav Bar */
+    .main-nav a {
+        padding: 0.75rem 0.7rem; /* Kurangi padding horizontal agar muat */
+        font-size: 0.9rem;
+    }
+
+    /* Hero Section */
+    .char-capital { font-size: 6rem; }
+    .char-lowercase { font-size: 7rem; }
+    .char-placeholder { width: 9rem; }
+    .char-image-large {
+        width: 9.8rem;
+        height: 10.5rem;
+        left: 4.2rem;
+    }
+    .l-block {
+        width: 1.5rem;
+        height: 6rem;
+        /* Aturan 'left' dan 'bottom' tidak lagi diperlukan karena posisi sudah otomatis */
+    }
+    .io-text { left: 2.5rem; }
+
+    /* Titles */
+    .about-title, .skills-title, .works-title { font-size: 3.5rem; }
+    .about-title .highlight, .skills-title .highlight, .works-title .highlight { font-size: 1.8rem; }
+
+    /* About Section di Mobile - DIUBAH TOTAL */
+    #about-section {
+        flex-direction: column; /* Tumpuk gambar dan teks secara vertikal */
+        align-items: center;    /* Pusatkan item di tengah */
+        text-align: center;     /* Pusatkan teks di dalam section */
+        padding: 4rem 1.5rem;
+    }
+    .about-image-container {
+        flex: none; /* Hapus aturan flex dari desktop */
+        width: 70%; /* Batasi lebar gambar agar tidak terlalu besar */
+        max-width: 280px;
+        margin-bottom: 2rem; /* Beri jarak antara gambar dan teks */
+        padding-right: 0; /* Hapus padding samping */
+    }
+    .about-description { text-align: left; } /* Deskripsi tetap rata kiri agar mudah dibaca */
+    .about-social-links { justify-content: center; } /* Pusatkan ikon sosial media */
+
+    /* Skills Section */
+    /* DIUBAH: Padding atas dikurangi agar tidak terlalu banyak ruang kosong di mobile */
+    #skills-section { padding-top: 6rem; padding-bottom: 4rem; }
+    #works-section { padding-top: 3rem; padding-bottom: 4rem; }
+    .skills-grid { gap: 1rem; flex-wrap: wrap; }
+    .skill-item { width: 100px; height: 120px; }
+    .skill-item img { width: 60px; height: 60px; }
+
+    /* Works Section */
+    .swiper-slide { width: 250px; height: 330px; }
+    .project-details-container { margin: 2rem 1rem 0; padding: 1.5rem; }
+    .project-description h3 { font-size: 1.8rem; }
+    .project-description p { font-size: 1rem; }
+}
